@@ -43,7 +43,11 @@ export default class Users extends Component {
                         .includes(search.toLocaleLowerCase())
                     ) {
                       return item;
-                    }
+					} else if (
+						item.adress.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+					) {
+						return item;
+					}
                   })
                   .map((item, index) => {
                     return (

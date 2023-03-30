@@ -21,15 +21,18 @@ export default class App extends Component {
   };
   addUser = () => {
     const { users, firstname, lastname, adress, age } = this.state;
-    users.push({
-      firstname: firstname,
-      lastname: lastname,
-      adress: adress,
-      age: age,
-    });
-    this.setState({
-      users,
-    });
+    if ((firstname !== "" && lastname !== "", adress !== "", age !== "")) {
+      users.push({
+        firstname: firstname,
+        lastname: lastname,
+        adress: adress,
+        age: age,
+      });
+      this.setState({
+        value: "",
+        users,
+      });
+    }
   };
   deleteUser = (index) => {
     const { users } = this.state;
@@ -49,7 +52,7 @@ export default class App extends Component {
                 <h1 className="text-center">Add User</h1>
               </div>
               <div className="card-body">
-                <form id="form">
+                <form>
                   <input
                     onChange={(e) =>
                       this.setState({ firstname: e.target.value })
@@ -57,6 +60,8 @@ export default class App extends Component {
                     type="text"
                     className="form-control my-2"
                     placeholder="Firstname..."
+                    value={this.state.value}
+                    required
                   />
                   <input
                     onChange={(e) =>
@@ -65,26 +70,31 @@ export default class App extends Component {
                     type="text"
                     className="form-control my-2"
                     placeholder="Lastname..."
+                    value={this.state.value}
+                    required
                   />
                   <input
                     onChange={(e) => this.setState({ adress: e.target.value })}
                     type="text"
                     className="form-control my-2"
                     placeholder="Adress..."
+                    value={this.state.value}
+                    required
                   />
                   <input
                     onChange={(e) => this.setState({ age: e.target.value })}
                     type="text"
                     className="form-control my-2"
                     placeholder="Age..."
+                    value={this.state.value}
+                    required
                   />
                 </form>
               </div>
               <div className="card-footer text-center">
                 <button
-                  type="reset"
+                  type="submit"
                   className="btn btn-success"
-                  form="form"
                   onClick={this.addUser}
                 >
                   Add user
